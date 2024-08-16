@@ -46,6 +46,11 @@
     font-size: 20px;
   }
 
+form-group .submit-btn:hover,
+form-group .submit-btn:focus {
+    opacity: 0.9;
+}
+
 h1 {
   font-size: 35px;
 }

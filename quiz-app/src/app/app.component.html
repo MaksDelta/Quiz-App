@@ -30,6 +30,7 @@
             </div>
 
             <div class="form-btn">
+              <button class="submit-btn">Random</button>
               <button class="submit-btn" (click)="quizQuestions()" *ngIf="!spinner">Start Quiz</button>
               <button class="submit-btn" type="button" disabled *ngIf="spinner">
                 <span class="spinner-border" role="status" aria-hidden="true"></span>

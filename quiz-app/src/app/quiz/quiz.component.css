@@ -21,13 +21,16 @@
 }
 
   .form-btn {
+    width: 100%;
     margin: auto;
     text-align: center;
+    display: flex;
+    justify-content: space-between;
   }
 
   .submit-btn {
     min-height: 60px;
-    min-width: 250px;
+    min-width: 150px;
     margin: auto;
     text-align: center;
     border-radius: 15px;
@@ -45,6 +48,11 @@
   button {
     font-size: 20px;
   }
+
+.row .submit-btn:hover,
+.row .submit-btn:focus {
+    opacity: 0.9;
+}
 
 h1{
   font-size: 35px;

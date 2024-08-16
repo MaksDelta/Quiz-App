@@ -15,6 +15,7 @@ export class AppComponent {
   public showMainMenu: boolean;
   public showQuizScreen: boolean;
   public showResultScreen: boolean;
+  // public showMenuScreen: boolean;
 
   public spinner: boolean;
 
@@ -51,6 +52,11 @@ export class AppComponent {
     this.showResultScreen = false;
     this.showMainMenu = true;
   }
+
+  // showMyMenuScreen(event: any): void {
+  //   this.showResultScreen = false;
+  //   this.showMainMenu = true;
+  // }
 
   toggleSpinner() {
     this.spinner = !this.spinner;
