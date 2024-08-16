@@ -5,6 +5,7 @@
 @import "../node_modules/bootstrap/scss/bootstrap"; */
 
 body, html {
+  width: 100%;
   height: 100%;
   padding: 0;
   margin: 0;
@@ -23,6 +24,8 @@ body, html {
 }
 
 #quiz {
+    width: 100%;
+    height: 100%;
     font-family: 'Consolas';
     background: radial-gradient(circle farthest-corner at 12.3% 19.3%, #EFEFEFFF 0%, #378d55 100.2%);
     background-size: cover;
@@ -66,5 +69,32 @@ body, html {
     transform: rotate(90deg);
 }
 
+@media only screen and (max-width: 900px) {
+.quiz-form select.form-control+.select-arrow {
+    position: absolute;
+    right: 55px;
+    bottom: 10px;
+    width: 32px;
+    line-height: 32px;
+    height: 32px;
+    text-align: center;
+    pointer-events: none;
+    color: rgba(62, 72, 92, 0.3);
+    font-size: 18px;
+}
+}
 
-
+@media only screen and (max-width: 600px) {
+.quiz-form select.form-control+.select-arrow {
+    position: absolute;
+    right: 35px;
+    bottom: 10px;
+    width: 32px;
+    line-height: 32px;
+    height: 32px;
+    text-align: center;
+    pointer-events: none;
+    color: rgba(62, 72, 92, 0.3);
+    font-size: 12px;
+}
+}
