@@ -1,4 +1,3 @@
-import { answers } from './../interface/question';
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Question } from '../interface/question';
 import { Result } from '../interface/result';

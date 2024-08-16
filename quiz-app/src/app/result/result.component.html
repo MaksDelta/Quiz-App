@@ -1,23 +1,21 @@
-<div clas="row justify-content-md-center">
-  <div class="col-md-9 mx-auto">
-    <div class="quiz-form">
+<div clas="row">
+
       <div class="row">
-        <div class="col-md-12">
+
           <div class="form-group">
+
             <h1>Result</h1>
-            <hr>
-            <div class="row text-center">
-              <div class="col-md-4">
+              <div class="resultQuiz">
                 <div class="circle">{{finalResult?.total}}</div>
-                <p>Total<br>Question</p>
+                <p>Total Question</p>
               </div>
-              <div class="col-md-4">
+              <div class="resultQuiz">
                 <div class="circle">{{finalResult?.correct}}</div>
-                <p>Correct<br>Answers</p>
+                <p>Correct Answers</p>
               </div>
-              <div class="col-md-4">
+              <div class="resultQuiz">
                 <div class="circle">{{finalResult?.wrong}}</div>
-                <p>Wrong<br>Answers</p>
+                <p>Wrong Answers</p>
               </div>
             </div>
             <div class="progress-stacked">
@@ -31,14 +29,14 @@
                 [style.width]="finalResult?.wrongPercentage+'%'">
                 <div class="progress-bar bg-danger">{{finalResult?.wrongPercentage}}%</div>
               </div>
-            </div>
             <br>
-            <div class="form-btn text-center">
+
+            <div class="form-btn">
               <button class="submit-btn" (click)="showMainMenu()">Main Menu</button>
             </div>
+
           </div>
-        </div>
-      </div>
-    </div>
+
   </div>
+
 </div>
