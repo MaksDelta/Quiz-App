@@ -56,14 +56,14 @@ export class AppComponent {
   }
 
   random() {
-    const randomDifficultyIndex = Math.floor(
+    const randomDifficultyLimit = Math.floor(
       Math.random() * this.questionsLimits.length
     );
-    this.questionsLimit = this.questionsLimits[randomDifficultyIndex];
-    const randomDifficultyIndexDifficulty = Math.floor(
+    this.questionsLimit = this.questionsLimits[randomDifficultyLimit];
+    const randomDifficultyIndex = Math.floor(
       Math.random() * this.difficulties.length
     );
-    this.difficulty = this.difficulties[randomDifficultyIndexDifficulty];
+    this.difficulty = this.difficulties[randomDifficultyIndex];
     this.showMainMenu = false;
     this.showQuizScreen = true;
   }
