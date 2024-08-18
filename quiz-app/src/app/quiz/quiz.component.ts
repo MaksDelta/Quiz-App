@@ -1,7 +1,7 @@
 
 import { Component, Output, EventEmitter } from '@angular/core';
-import { Question } from '../interface/question';
-import { Result } from '../interface/result';
+import { Question } from '../interfaces/question';
+import { Result } from '../interfaces/result';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { Result } from '../interface/result';
 })
 export class QuizComponent {
   @Output() finalResult = new EventEmitter();
-  // @Output() showMenuScreen = new EventEmitter();
+  @Output() showMenuScreen = new EventEmitter();
 
   public questions: Array<any>;
   public selected = {} as Question;
@@ -29,9 +29,9 @@ export class QuizComponent {
     this.selected = this.questions[index];
   }
 
-  // showMyMainMenu(): void {
-  //   this.showMenuScreen.emit(true);
-  // }
+  showMyMainMenu(): void {
+    this.showMenuScreen.emit(true);
+  }
 
   nextQuestion(): void {
     if (this.answer == '') return;

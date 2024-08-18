@@ -11,13 +11,14 @@ import { ResultComponent } from './result/result.component';
 export class AppComponent {
   public questionsLimit: number;
   public difficulty: string;
+  private difficulties: string[] = ['Easy', 'Medium', 'Hard'];
+  private questionsLimits: number[] = [5, 10, 15, 20];
 
   public showMainMenu: boolean;
   public showQuizScreen: boolean;
   public showResultScreen: boolean;
-  // public showMenuScreen: boolean;
 
-  public spinner: boolean;
+  public loading: boolean;
 
   @ViewChild('quiz', { static: true }) quiz!: QuizComponent;
   @ViewChild('result', { static: true }) result!: ResultComponent;
@@ -29,7 +30,7 @@ export class AppComponent {
   }
 
   quizQuestions(): void {
-    this.toggleSpinner();
+    this.toggleLoading();
     this.quizService
       .getQuizQuestions(this.difficulty, this.questionsLimit)
       .subscribe((response) => {
@@ -38,7 +39,7 @@ export class AppComponent {
         this.quiz.showQuestion(0);
         this.showMainMenu = false;
         this.showQuizScreen = true;
-        this.toggleSpinner();
+        this.toggleLoading();
       });
   }
 
@@ -49,16 +50,23 @@ export class AppComponent {
   }
 
   showMainMenuScreen(event: any): void {
+    this.showQuizScreen = false;
     this.showResultScreen = false;
     this.showMainMenu = true;
   }
 
-  // showMyMenuScreen(event: any): void {
-  //   this.showResultScreen = false;
-  //   this.showMainMenu = true;
-  // }
+  random() {
+    const randomDifficultyIndex = Math.floor(
+      Math.random() * this.questionsLimits.length
+    );
+    this.questionsLimit = this.questionsLimits[randomDifficultyIndex];
+    const randomDifficultyIndexDifficulty = Math.floor(
+      Math.random() * this.difficulties.length
+    );
+    this.difficulty = this.difficulties[randomDifficultyIndexDifficulty];
+  }
 
-  toggleSpinner() {
-    this.spinner = !this.spinner;
+  toggleLoading() {
+    this.loading = !this.loading;
   }
 }

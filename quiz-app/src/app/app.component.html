@@ -1,7 +1,8 @@
 <div id="quiz" class="section">
     <div class="container">
 
-      <app-quiz #quiz [style.display]="(showQuizScreen)?'block':'none'" (finalResult)="finalResult($event)"></app-quiz>
+      <app-quiz #quiz [style.display]="(showQuizScreen)?'block':'none'" (finalResult)="finalResult($event)"
+      (showMenuScreen)="showMainMenuScreen($event)"></app-quiz>
       <app-result #result [style.display]="(showResultScreen)?'block':'none'"
         (showMainMenuScreen)="showMainMenuScreen($event)"></app-result>
       <div [style.display]="(showMainMenu)?'block':'none'" class="allInfo">
@@ -10,7 +11,7 @@
 
             <div class="form-group">
               <span class="form-label">Difficulty</span>
-              <select class="form-control" [ngModel]="difficulty">
+              <select class="form-control" [(ngModel)]="difficulty">
                 <option>Easy</option>
                 <option>Medium</option>
                 <option>Hard</option>
@@ -20,7 +21,7 @@
 
             <div class="form-group">
               <span class="form-label">Question</span>
-              <select class="form-control" [ngModel]="questionsLimit">
+              <select class="form-control" [(ngModel)]="questionsLimit">
                 <option>5</option>
                 <option>10</option>
                 <option>15</option>
@@ -30,9 +31,9 @@
             </div>
 
             <div class="form-btn">
-              <button class="submit-btn">Random</button>
-              <button class="submit-btn" (click)="quizQuestions()" *ngIf="!spinner">Start Quiz</button>
-              <button class="submit-btn" type="button" disabled *ngIf="spinner">
+              <button class="submit-btn" (click)="random()">Random</button>
+              <button class="submit-btn" (click)="quizQuestions()" *ngIf="!loading">Start Quiz</button>
+              <button class="submit-btn" type="button" disabled *ngIf="loading">
                 <span class="spinner-border" role="status" aria-hidden="true"></span>
                 Loading...
               </button>
