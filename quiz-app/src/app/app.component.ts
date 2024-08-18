@@ -64,6 +64,8 @@ export class AppComponent {
       Math.random() * this.difficulties.length
     );
     this.difficulty = this.difficulties[randomDifficultyIndexDifficulty];
+    this.showMainMenu = false;
+    this.showQuizScreen = true;
   }
 
   toggleLoading() {
