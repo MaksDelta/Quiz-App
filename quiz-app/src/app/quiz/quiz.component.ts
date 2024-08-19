@@ -1,8 +1,6 @@
-
 import { Component, Output, EventEmitter } from '@angular/core';
 import { Question } from '../interfaces/question';
 import { Result } from '../interfaces/result';
-
 
 @Component({
   selector: 'app-quiz',
@@ -16,6 +14,9 @@ export class QuizComponent {
   public questions: Array<any>;
   public selected = {} as Question;
   public result = {} as Result;
+
+  public questionsLimit: number;
+  public difficulty: string;
 
   public index: number;
   public answer: string;

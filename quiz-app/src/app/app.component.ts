@@ -56,16 +56,25 @@ export class AppComponent {
   }
 
   random() {
-    const randomDifficultyLimit = Math.floor(
-      Math.random() * this.questionsLimits.length
-    );
-    this.questionsLimit = this.questionsLimits[randomDifficultyLimit];
-    const randomDifficultyIndex = Math.floor(
-      Math.random() * this.difficulties.length
-    );
-    this.difficulty = this.difficulties[randomDifficultyIndex];
-    this.showMainMenu = false;
-    this.showQuizScreen = true;
+//     const randomDifficultyIndex =
+//       Math.floor(Math.random() * (this.difficulty.length - 1 + 1)) + 1;
+// console.log(randomDifficultyIndex);
+//     this.difficulty = this.difficulty[randomDifficultyIndex];
+
+//     const randomDifficultyLimit =
+//       Math.floor(Math.random() * (4 - 1 + 1)) + 1;
+//     console.log(randomDifficultyLimit);
+//     this.questionsLimit = randomDifficultyLimit;
+const randomDifficultyLimit = Math.floor(
+  Math.random() * this.questionsLimits.length
+);
+this.questionsLimit = this.questionsLimits[randomDifficultyLimit];
+const randomDifficultyIndex = Math.floor(
+  Math.random() * this.difficulties.length
+);
+this.difficulty = this.difficulties[randomDifficultyIndex];
+this.showMainMenu = false;
+this.showQuizScreen = true;
   }
 
   toggleLoading() {
