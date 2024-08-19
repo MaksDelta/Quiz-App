@@ -1,7 +1,5 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { QuizService } from './services/quiz.service';
-import { QuizComponent } from './quiz/quiz.component';
-import { ResultComponent } from './result/result.component';
 
 @Component({
   selector: 'app-root',
@@ -18,10 +16,9 @@ export class AppComponent {
   public showQuizScreen: boolean;
   public showResultScreen: boolean;
 
-  public loading: boolean;
+  test: any;
 
-  @ViewChild('quiz', { static: true }) quiz!: QuizComponent;
-  @ViewChild('result', { static: true }) result!: ResultComponent;
+  public loading: boolean;
 
   constructor(private quizService: QuizService) {
     this.questionsLimit = 10;
@@ -29,14 +26,15 @@ export class AppComponent {
     this.showMainMenu = true;
   }
 
-  quizQuestions(): void {
+  quizQuestions(isRandom = false): void {
+    if(isRandom) {
+      this.random()
+    }
     this.toggleLoading();
     this.quizService
       .getQuizQuestions(this.difficulty, this.questionsLimit)
       .subscribe((response) => {
-        this.quiz.questions = response;
-        this.quiz.reset();
-        this.quiz.showQuestion(0);
+        this.test = response;
         this.showMainMenu = false;
         this.showQuizScreen = true;
         this.toggleLoading();
@@ -44,7 +42,6 @@ export class AppComponent {
   }
 
   finalResult(result: any): void {
-    this.result.finalResult = result;
     this.showQuizScreen = false;
     this.showResultScreen = true;
   }
@@ -56,25 +53,14 @@ export class AppComponent {
   }
 
   random() {
-//     const randomDifficultyIndex =
-//       Math.floor(Math.random() * (this.difficulty.length - 1 + 1)) + 1;
-// console.log(randomDifficultyIndex);
-//     this.difficulty = this.difficulty[randomDifficultyIndex];
-
-//     const randomDifficultyLimit =
-//       Math.floor(Math.random() * (4 - 1 + 1)) + 1;
-//     console.log(randomDifficultyLimit);
-//     this.questionsLimit = randomDifficultyLimit;
-const randomDifficultyLimit = Math.floor(
-  Math.random() * this.questionsLimits.length
-);
-this.questionsLimit = this.questionsLimits[randomDifficultyLimit];
-const randomDifficultyIndex = Math.floor(
-  Math.random() * this.difficulties.length
-);
-this.difficulty = this.difficulties[randomDifficultyIndex];
-this.showMainMenu = false;
-this.showQuizScreen = true;
+    const randomDifficultyLimit = Math.floor(
+      Math.random() * this.questionsLimits.length
+    );
+    this.questionsLimit = this.questionsLimits[randomDifficultyLimit];
+    const randomDifficultyIndex = Math.floor(
+      Math.random() * this.difficulties.length
+    );
+    this.difficulty = this.difficulties[randomDifficultyIndex];
   }
 
   toggleLoading() {

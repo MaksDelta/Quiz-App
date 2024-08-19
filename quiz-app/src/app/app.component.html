@@ -1,12 +1,15 @@
 <div id="quiz" class="section">
     <div class="container">
 
-      <app-quiz #quiz [style.display]="(showQuizScreen)?'block':'none'" (finalResult)="finalResult($event)"
-      (showMenuScreen)="showMainMenuScreen($event)"></app-quiz>
-      <app-result #result [style.display]="(showResultScreen)?'block':'none'"
-        (showMainMenuScreen)="showMainMenuScreen($event)"></app-result>
+      <app-quiz #quiz *ngIf="showQuizScreen" (finalResult)="finalResult($event)"
+        (showMenuScreen)="showMainMenuScreen($event)" [questions]="test" [difficulty]="difficulty"
+        [questionsLimit]="questionsLimit">
+      </app-quiz>
+      <app-result #result *ngIf="showResultScreen" (showMainMenuScreen)="showMainMenuScreen($event)"
+        [finalResult]="showResultScreen" >
+      </app-result>
+      
       <div [style.display]="(showMainMenu)?'block':'none'" class="allInfo">
-
         <div class="quiz-form">
 
             <div class="form-group">
@@ -31,7 +34,7 @@
             </div>
 
             <div class="form-btn">
-              <button class="submit-btn" (click)="random()">Random</button>
+              <button class="submit-btn" (click)="quizQuestions(true)">Random</button>
               <button class="submit-btn" (click)="quizQuestions()" *ngIf="!loading">Start Quiz</button>
               <button class="submit-btn" type="button" disabled *ngIf="loading">
                 <span class="spinner-border" role="status" aria-hidden="true"></span>

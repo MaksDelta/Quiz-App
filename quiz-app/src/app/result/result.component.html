@@ -1,41 +1,29 @@
 <div clas="row">
 
-      <div class="row">
+  <div class="row">
 
-          <div class="form-group">
+    <div class="form-group">
 
-            <h1>Result</h1>
-              <div class="resultQuiz">
-                <div class="circle">{{finalResult?.total}}</div>
-                <p>Total Question</p>
-              </div>
-              <div class="resultQuiz">
-                <div class="circle">{{finalResult?.correct}}</div>
-                <p>Correct Answers</p>
-              </div>
-              <div class="resultQuiz">
-                <div class="circle">{{finalResult?.wrong}}</div>
-                <p>Wrong Answers</p>
-              </div>
-            </div>
-            <!-- <div class="progress-stacked">
-              <div class="progress" role="progressbar" aria-label="Segment one"
-                [attr.aria-valuenow]="finalResult?.correctPercentage" aria-valuemin="0" aria-valuemax="100"
-                [style.width]="finalResult?.correctPercentage+'%'">
-                <div class="progress-bar">{{finalResult?.correctPercentage}}%</div>
-              </div>
-              <div class="progress" role="progressbar" aria-label="Segment two"
-                [attr.aria-valuenow]="finalResult?.wrongPercentage" aria-valuemin="0" aria-valuemax="100"
-                [style.width]="finalResult?.wrongPercentage+'%'">
-                <div class="progress-bar bg-danger">{{finalResult?.wrongPercentage}}%</div>
-              </div>
-            <br> -->
+      <h1>Result</h1>
+      <div class="resultQuiz">
+        <div class="circle">{{finalResult?.total}}</div>
+        <p>Total Question</p>
+      </div>
+      <div class="resultQuiz">
+        <div class="circle">{{finalResult?.correct}}</div>
+        <p>Correct Answers</p>
+      </div>
+      <div class="resultQuiz">
+        <div class="circle">{{finalResult?.wrong}}</div>
+        <p>Wrong Answers</p>
+      </div>
+    </div>
+    
+    <div class="form-btn">
+      <button class="submit-btn" (click)="showMainMenu()">Main Menu</button>
+    </div>
 
-            <div class="form-btn">
-              <button class="submit-btn" (click)="showMainMenu()">Main Menu</button>
-            </div>
-
-          <!-- </div> -->
+    <!-- </div> -->
 
   </div>
 

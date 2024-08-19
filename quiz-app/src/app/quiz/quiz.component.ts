@@ -1,4 +1,10 @@
-import { Component, Output, EventEmitter, OnDestroy } from '@angular/core';
+import {
+  Component,
+  Output,
+  EventEmitter,
+  Input,
+  OnInit,
+} from '@angular/core';
 import { interval, Subscription } from 'rxjs';
 import { Question } from '../interfaces/question';
 import { Result } from '../interfaces/result';
@@ -6,29 +12,31 @@ import { Result } from '../interfaces/result';
 @Component({
   selector: 'app-quiz',
   templateUrl: './quiz.component.html',
-  styleUrl: './quiz.component.css',
+  styleUrls: ['./quiz.component.css'],
 })
-export class QuizComponent {
+export class QuizComponent implements OnInit {
   @Output() finalResult = new EventEmitter();
   @Output() showMenuScreen = new EventEmitter();
+  @Input() questions: Array<any> = [];
+  @Input() difficulty: string = '';
+  @Input() questionsLimit: number = 0;
 
-  public questions: Array<any>;
   public selected = {} as Question;
   public result = {} as Result;
 
-  public timeElapsed: number;
+  public timeElapsed: number = 0;
+  public minutes: number = 0;
+  public seconds: number = 0;
   private timerSubscription!: Subscription;
 
-  public questionsLimit: number;
-  public difficulty: string;
+  public index: number = 0;
+  public answer: string = '';
 
-  public index: number;
-  public answer: string;
+  constructor() {}
 
-  constructor() {
-    this.questions = [];
-    this.timeElapsed = 0; 
+  ngOnInit(): void {
     this.reset();
+    this.showQuestion(0);
   }
 
   showQuestion(index: number): void {
@@ -45,18 +53,23 @@ export class QuizComponent {
   }
 
   finishQuiz() {
-    this.stopTimer(); // Stop the timer when the quiz is finished
+    this.stopTimer();
 
     this.result.total = this.questions.length;
     this.result.correctPercentage =
       (this.result.correct / this.result.total) * 100;
     this.result.wrongPercentage = (this.result.wrong / this.result.total) * 100;
 
-    this.finalResult.emit(this.result);
+    this.finalResult.emit({
+      result: this.result,
+      difficulty: this.difficulty,
+      questionsLimit: this.questionsLimit,
+      timeElapsed: this.timeElapsed,
+    });
   }
 
   nextQuestion(): void {
-    if (this.answer == '') return;
+    if (this.answer === '') return;
     this.checkAnswer();
     this.index++;
     if (this.questions.length > this.index) {
@@ -75,7 +88,15 @@ export class QuizComponent {
   startTimer(): void {
     this.timerSubscription = interval(1000).subscribe(() => {
       this.timeElapsed++;
+      this.minutes = Math.floor(this.timeElapsed / 60);
+      this.seconds = this.timeElapsed % 60;
     });
+  }
+
+  timeConvert(seconds: number): string {
+    const minutes = Math.floor(seconds / 60);
+    const secondsLeft = seconds % 60;
+    return `${minutes}:${secondsLeft}`;
   }
 
   stopTimer(): void {
@@ -87,7 +108,7 @@ export class QuizComponent {
   reset(): void {
     this.answer = '';
     this.index = 0;
-    this.timeElapsed = 0; 
+    this.timeElapsed = 0;
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
     }
