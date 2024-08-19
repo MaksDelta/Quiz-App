@@ -1,4 +1,7 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
+import { Result } from '../interfaces/result';
+import { Question } from '../interfaces/question';
+
 
 @Component({
   selector: 'app-result',
@@ -7,10 +10,15 @@ import { Component, Output, EventEmitter } from '@angular/core';
 })
 export class ResultComponent {
   @Output() showMainMenuScreen = new EventEmitter();
-
-  public finalResult: any;
+  @Input() finalResult: any;
 
   showMainMenu() {
     this.showMainMenuScreen.emit(true);
+  }
+
+  timeConvert(seconds: number): string {
+    const minutes = Math.floor(seconds / 60);
+    const secondsLeft = seconds % 60;
+    return `${minutes} min ${secondsLeft} sec`;
   }
 }

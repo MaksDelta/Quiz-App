@@ -35,7 +35,6 @@ export class QuizComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    this.reset();
     this.showQuestion(0);
   }
 
@@ -103,21 +102,5 @@ export class QuizComponent implements OnInit {
     if (this.timerSubscription) {
       this.timerSubscription.unsubscribe();
     }
-  }
-
-  reset(): void {
-    this.answer = '';
-    this.index = 0;
-    this.timeElapsed = 0;
-    if (this.timerSubscription) {
-      this.timerSubscription.unsubscribe();
-    }
-    this.result = {
-      total: 0,
-      correct: 0,
-      wrong: 0,
-      correctPercentage: 0,
-      wrongPercentage: 0,
-    };
   }
 }

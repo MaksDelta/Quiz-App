@@ -17,6 +17,7 @@ export class AppComponent {
   public showResultScreen: boolean;
 
   test: any;
+  public finalResultData: any;
 
   public loading: boolean;
 
@@ -27,8 +28,8 @@ export class AppComponent {
   }
 
   quizQuestions(isRandom = false): void {
-    if(isRandom) {
-      this.random()
+    if (isRandom) {
+      this.random();
     }
     this.toggleLoading();
     this.quizService
@@ -42,6 +43,7 @@ export class AppComponent {
   }
 
   finalResult(result: any): void {
+    this.finalResultData = result;
     this.showQuizScreen = false;
     this.showResultScreen = true;
   }

@@ -1,14 +1,20 @@
 <div id="quiz" class="section">
     <div class="container">
 
-      <app-quiz #quiz *ngIf="showQuizScreen" (finalResult)="finalResult($event)"
-        (showMenuScreen)="showMainMenuScreen($event)" [questions]="test" [difficulty]="difficulty"
-        [questionsLimit]="questionsLimit">
+      <app-quiz #quiz 
+        *ngIf="showQuizScreen" 
+        (finalResult)="finalResult($event)"
+        (showMenuScreen)="showMainMenuScreen($event)" 
+        [questions]="test" 
+        [difficulty]="difficulty"
+        [questionsLimit]="questionsLimit" 
+        [questions]="test">
       </app-quiz>
-      <app-result #result *ngIf="showResultScreen" (showMainMenuScreen)="showMainMenuScreen($event)"
-        [finalResult]="showResultScreen" >
+      <app-result #result 
+        *ngIf="showResultScreen" 
+        (showMainMenuScreen)="showMainMenuScreen($event)"
+        [finalResult]="finalResultData">
       </app-result>
-      
       <div [style.display]="(showMainMenu)?'block':'none'" class="allInfo">
         <div class="quiz-form">
 

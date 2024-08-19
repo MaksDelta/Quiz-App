@@ -6,24 +6,22 @@
 
       <h1>Result</h1>
       <div class="resultQuiz">
-        <div class="circle">{{finalResult?.total}}</div>
-        <p>Total Question</p>
+        <p>Difficulty</p>
+        <div class="circle">{{ finalResult?.difficulty }}</div>
       </div>
       <div class="resultQuiz">
-        <div class="circle">{{finalResult?.correct}}</div>
-        <p>Correct Answers</p>
+        <p>Total Questions</p>
+        <div class="circle">{{ finalResult?.questionsLimit }}</div>
       </div>
       <div class="resultQuiz">
-        <div class="circle">{{finalResult?.wrong}}</div>
-        <p>Wrong Answers</p>
+        <p>Your Time</p>
+        <div class="circle">{{ timeConvert(finalResult?.timeElapsed) }}</div>
       </div>
     </div>
-    
+
     <div class="form-btn">
       <button class="submit-btn" (click)="showMainMenu()">Main Menu</button>
     </div>
-
-    <!-- </div> -->
 
   </div>
 
