@@ -1,4 +1,5 @@
-import { Component, Output, EventEmitter } from '@angular/core';
+import { Component, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { interval, Subscription } from 'rxjs';
 import { Question } from '../interfaces/question';
 import { Result } from '../interfaces/result';
 
@@ -15,6 +16,9 @@ export class QuizComponent {
   public selected = {} as Question;
   public result = {} as Result;
 
+  public timeElapsed: number;
+  private timerSubscription!: Subscription;
+
   public questionsLimit: number;
   public difficulty: string;
 
@@ -23,15 +27,32 @@ export class QuizComponent {
 
   constructor() {
     this.questions = [];
+    this.timeElapsed = 0; 
     this.reset();
   }
 
   showQuestion(index: number): void {
     this.selected = this.questions[index];
+
+    if (index === 0 && !this.timerSubscription) {
+      this.startTimer();
+    }
   }
 
   showMyMainMenu(): void {
     this.showMenuScreen.emit(true);
+    this.stopTimer();
+  }
+
+  finishQuiz() {
+    this.stopTimer(); // Stop the timer when the quiz is finished
+
+    this.result.total = this.questions.length;
+    this.result.correctPercentage =
+      (this.result.correct / this.result.total) * 100;
+    this.result.wrongPercentage = (this.result.wrong / this.result.total) * 100;
+
+    this.finalResult.emit(this.result);
   }
 
   nextQuestion(): void {
@@ -51,18 +72,25 @@ export class QuizComponent {
     isAnswer === 'true' ? this.result.correct++ : this.result.wrong++;
   }
 
-  finishQuiz() {
-    this.result.total = this.questions.length;
-    this.result.correctPercentage =
-      (this.result.correct / this.result.total) * 100;
-    this.result.wrongPercentage = (this.result.wrong / this.result.total) * 100;
+  startTimer(): void {
+    this.timerSubscription = interval(1000).subscribe(() => {
+      this.timeElapsed++;
+    });
+  }
 
-    this.finalResult.emit(this.result);
+  stopTimer(): void {
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
   }
 
   reset(): void {
     this.answer = '';
     this.index = 0;
+    this.timeElapsed = 0; 
+    if (this.timerSubscription) {
+      this.timerSubscription.unsubscribe();
+    }
     this.result = {
       total: 0,
       correct: 0,
